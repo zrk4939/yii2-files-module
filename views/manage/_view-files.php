@@ -1,17 +1,17 @@
 <?php
 
 use domain\helpers\ThumbnailHelper;
-use domain\modules\files\helpers\FilesHelper;
+use zrk4939\modules\files\helpers\FilesHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
-/* @var $files \domain\modules\files\models\File[] */
+/* @var $files \zrk4939\modules\files\models\File[] */
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
 
-\domain\modules\files\assets\FilesAsset::register($this);
+\zrk4939\modules\files\assets\FilesAsset::register($this);
 ?>
 <div class="">
     <?= $pages->totalCount ?> записей всего

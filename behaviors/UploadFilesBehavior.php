@@ -6,10 +6,10 @@
  * Time: 13:44
  */
 
-namespace domain\modules\files\behaviors;
+namespace zrk4939\modules\files\behaviors;
 
 
-use domain\modules\files\models\File;
+use zrk4939\modules\files\models\File;
 use Yii;
 use yii\base\Behavior;
 use yii\base\InvalidParamException;

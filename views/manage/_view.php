@@ -3,7 +3,7 @@
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $files \domain\modules\files\models\File[] */
+/* @var $files \zrk4939\modules\files\models\File[] */
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
 /* @var $containerName string */

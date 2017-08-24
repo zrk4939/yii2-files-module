@@ -6,14 +6,14 @@
  * Time: 16:14
  */
 
-namespace domain\modules\files\assets;
+namespace zrk4939\modules\files\assets;
 
 
 use yii\web\AssetBundle;
 
 class FilesAsset extends AssetBundle
 {
-    public $sourcePath = '@domain/modules/files/assets/dist';
+    public $sourcePath = '@zrk4939/modules/files/assets/dist';
 
     public $css = [
         'files.css',

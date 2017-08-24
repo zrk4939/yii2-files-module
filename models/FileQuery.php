@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\modules\files\models;
+namespace zrk4939\modules\files\models;
 
 /**
  * This is the ActiveQuery class for [[File]].

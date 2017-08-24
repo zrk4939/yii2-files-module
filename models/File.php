@@ -1,9 +1,9 @@
 <?php
 
-namespace domain\modules\files\models;
+namespace zrk4939\modules\files\models;
 
 use domain\modules\content\models\ContentItem;
-use domain\modules\files\behaviors\UploadFilesBehavior;
+use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use domain\modules\gallery\models\Gallery;
 use Yii;
 use yii\behaviors\TimestampBehavior;

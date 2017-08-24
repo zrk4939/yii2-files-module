@@ -6,10 +6,10 @@
  * Time: 9:28
  */
 
-namespace domain\modules\files\helpers;
+namespace zrk4939\modules\files\helpers;
 
 
-use domain\modules\files\models\File;
+use zrk4939\modules\files\models\File;
 use yii\base\Object;
 
 class FilesHelper extends Object

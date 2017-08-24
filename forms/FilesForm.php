@@ -6,11 +6,11 @@
  * Time: 12:46
  */
 
-namespace domain\modules\files\forms;
+namespace zrk4939\modules\files\forms;
 
 
-use domain\modules\files\FilesModule;
-use domain\modules\files\models\File;
+use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\models\File;
 use Yii;
 use yii\base\Model;
 use yii\helpers\FileHelper;

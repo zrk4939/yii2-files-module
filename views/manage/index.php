@@ -4,9 +4,9 @@ use yii\bootstrap\Tabs;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $files \domain\modules\files\models\File[] */
+/* @var $files \zrk4939\modules\files\models\File[] */
 /* @var $pages \yii\data\Pagination */
-/* @var $model \domain\modules\files\forms\FilesForm */
+/* @var $model \zrk4939\modules\files\forms\FilesForm */
 /* @var $frame boolean */
 /* @var $containerName string */
 

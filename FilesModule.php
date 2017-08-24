@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\modules\files;
+namespace zrk4939\modules\files;
 
 /**
  * files module definition class

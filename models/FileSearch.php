@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\modules\files\models;
+namespace zrk4939\modules\files\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

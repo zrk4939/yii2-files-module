@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model domain\modules\files\models\File */
+/* @var $model zrk4939\modules\files\models\File */
 
 $this->title = Yii::t('domain', 'Updating');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('domain', 'Files'), 'url' => ['index']];

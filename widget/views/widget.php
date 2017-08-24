@@ -1,6 +1,6 @@
 <?php
 
-use domain\modules\files\widget\assets\FilesWidgetAsset;
+use zrk4939\modules\files\widget\assets\FilesWidgetAsset;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 
@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $model \yii\db\ActiveRecord */
 /* @var $attribute string */
 /* @var $multiple boolean */
-/* @var $files \domain\modules\files\models\File[] */
+/* @var $files \zrk4939\modules\files\models\File[] */
 /* @var array $types */
 
 $inputName = ($multiple) ? Html::getInputName($model, $attribute) . '[]' : Html::getInputName($model, $attribute);

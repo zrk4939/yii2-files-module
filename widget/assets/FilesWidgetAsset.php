@@ -6,7 +6,7 @@
  * Time: 10:53
  */
 
-namespace domain\modules\files\widget\assets;
+namespace zrk4939\modules\files\widget\assets;
 
 
 use yii\web\AssetBundle;

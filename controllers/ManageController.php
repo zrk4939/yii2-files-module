@@ -1,11 +1,11 @@
 <?php
 
-namespace domain\modules\files\controllers;
+namespace zrk4939\modules\files\controllers;
 
 use domain\helpers\ImageOptimization;
-use domain\modules\files\FilesModule;
-use domain\modules\files\forms\FilesForm;
-use domain\modules\files\models\File;
+use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\forms\FilesForm;
+use zrk4939\modules\files\models\File;
 use domain\widgets\PluploadWidget\actions\PluploadAction;
 use Yii;
 use yii\bootstrap\Html;
@@ -150,7 +150,7 @@ class ManageController extends Controller
 
     /**
      * @param array|string $mimeTypes
-     * @return \domain\modules\files\models\FileQuery
+     * @return \zrk4939\modules\files\models\FileQuery
      */
     private function getFilesQuery($mimeTypes = [])
     {

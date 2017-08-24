@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\modules\files\controllers;
+namespace zrk4939\modules\files\controllers;
 
 use yii\web\Controller;
 

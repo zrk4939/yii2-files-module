@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \domain\modules\files\forms\FilesForm */
+/* @var $model \zrk4939\modules\files\forms\FilesForm */
 ?>
 <div class="file-create">
 
