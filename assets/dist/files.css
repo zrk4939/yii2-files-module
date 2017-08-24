@@ -1,0 +1,70 @@
+.images__image {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.images__file {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.images__file > .fa {
+    position: absolute;
+    top: 0;
+    left: 32px;
+    font-size: 100px;
+    line-height: 150px;
+}
+
+.images__file > a,
+.images__image > a {
+    opacity: 0;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    transition: all 0.5s;
+}
+
+.images__file:hover > a,
+.images__image:hover > a {
+    opacity: 1;
+}
+
+.images__file > a.file-edit,
+.images__image > a.file-edit {
+    left: 55px;
+}
+
+.images__file > a.file-delete,
+.images__image > a.file-delete {
+    left: 105px;
+}
+
+.files__filename {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    /*top: 0;*/
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 3px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+
+    transition: all 0.5s;
+}
+
+.images__file:hover .files__filename,
+.images__image:hover .files__filename {
+    height: 100%;
+}
