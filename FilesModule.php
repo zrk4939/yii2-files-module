@@ -13,7 +13,7 @@ class FilesModule extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'domain\modules\files\controllers';
+    public $controllerNamespace = 'zrk4939\modules\files\controllers';
 
     /**
      * @return array
