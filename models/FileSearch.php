@@ -40,9 +40,10 @@ class FileSearch extends File
      */
     public function search($params, $where = [])
     {
-        $query = File::find();
+        $query = File::find()
+            ->orderBy(['created_at' => SORT_DESC]);
 
-        if (!empty($where)){
+        if (!empty($where)) {
             $query->andWhere($where);
         }
 
