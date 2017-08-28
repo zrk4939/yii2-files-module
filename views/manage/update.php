@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model zrk4939\modules\files\models\File */
 
-$this->title = Yii::t('domain', 'Updating');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('domain', 'Files'), 'url' => ['index']];
+$this->title = Yii::t('yii', 'Updating');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yii', 'Files'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title
 ?>
 <div class="file-update">
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title
                 <?= $form->field($model, 'status')->widget(SwitchInput::className()) ?>
 
                 <div class="form-group clearfix">
-                    <?= Html::submitButton(Yii::t('domain', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
+                    <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
                 </div>
             </div>
         </div>

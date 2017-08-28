@@ -6,7 +6,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * FileSearch represents the model behind the search form about `domain\modules\files\models\File`.
+ * FileSearch represents the model behind the search form about `zrk4939\modules\files\models\File`.
  */
 class FileSearch extends File
 {

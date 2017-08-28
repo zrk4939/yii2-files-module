@@ -29,7 +29,7 @@ $('.file-one-row').on('click', function() {
 JS;
     $this->registerJs($script);
 } else {
-    $dataColumns[] = ['class' => 'domain\helpers\ActionColumn'];
+//    $dataColumns[] = ['class' => 'domain\helpers\ActionColumn']; TODO
 }
 
 ?>

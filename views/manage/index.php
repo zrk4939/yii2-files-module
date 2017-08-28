@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $frame boolean */
 /* @var $containerName string */
 
-$this->title = Yii::t('domain', 'Files');
+$this->title = Yii::t('yii', 'Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Tabs::widget([
         'items' => [
             [
-                'label' => Yii::t('domain', 'View'),
+                'label' => Yii::t('yii', 'View'),
                 'content' => $this->render('_view', [
                     'files' => $files,
                     'pages' => $pages,
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'label' => Yii::t('domain', 'Upload'),
+                'label' => Yii::t('yii', 'Upload'),
                 'content' => $this->render('_uploading', ['model' => $model]),
             ]
         ]

@@ -2,9 +2,7 @@
 
 namespace zrk4939\modules\files\models;
 
-use domain\modules\content\models\ContentItem;
 use zrk4939\modules\files\behaviors\UploadFilesBehavior;
-use domain\modules\gallery\models\Gallery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\bootstrap\Html;
@@ -23,11 +21,8 @@ use yii\helpers\FileHelper;
  * @property integer $updated_at
  * @property integer $status
  *
- * @property ContentItem[] $contentItemsPreviews
- * @property ContentItem[] $contentItemsMainImages
- * @property Gallery[] $galleries
- *
  * @property boolean $isImage
+ * @property string $preview
  */
 class File extends \yii\db\ActiveRecord
 {
@@ -74,40 +69,18 @@ class File extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
+        // TODO add translations
+
         return [
-            'id' => Yii::t('domain', 'ID'),
-            'path' => Yii::t('domain', 'Path'),
-            'filename' => Yii::t('domain', 'Filename'),
-            'mime' => Yii::t('domain', 'Mime Type'),
-            'title' => Yii::t('domain', 'Title'),
-            'created_at' => Yii::t('domain', 'Created At'),
-            'updated_at' => Yii::t('domain', 'Updated At'),
-            'status' => Yii::t('domain', 'Active'),
+            'id' => Yii::t('yii', 'ID'),
+            'path' => Yii::t('yii', 'Path'),
+            'filename' => Yii::t('yii', 'Filename'),
+            'mime' => Yii::t('yii', 'Mime Type'),
+            'title' => Yii::t('yii', 'Title'),
+            'created_at' => Yii::t('yii', 'Created At'),
+            'updated_at' => Yii::t('yii', 'Updated At'),
+            'status' => Yii::t('yii', 'Active'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContentItemsPreviews()
-    {
-        return $this->hasMany(ContentItem::className(), ['preview_image' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContentItemsMainImages()
-    {
-        return $this->hasMany(ContentItem::className(), ['main_image' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGalleries()
-    {
-        return $this->hasMany(Gallery::className(), ['id' => 'gallery_id'])->viaTable('{{%gallery_images}}', ['file_id' => 'id']);
     }
 
     /**
@@ -124,7 +97,7 @@ class File extends \yii\db\ActiveRecord
     public function getPreview()
     {
         if (!$this->isImage) {
-            return Html::tag('span', Yii::t('domain', '(not available)'), ['class' => 'not-set']);
+            return Html::tag('span', Yii::t('yii', '(not available)'), ['class' => 'not-set']);
         }
 
         $url = '/uploads' . $this->path . $this->filename;

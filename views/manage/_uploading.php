@@ -25,7 +25,7 @@ use yii\helpers\Html;
         ]) ?>
 
         <div class="form-group clearfix">
-            <?= Html::submitButton(Yii::t('domain', 'Upload'), ['class' => 'btn btn-success pull-right']) ?>
+            <?= Html::submitButton(Yii::t('yii', 'Upload'), ['class' => 'btn btn-success pull-right']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

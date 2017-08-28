@@ -26,8 +26,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group clearfix">
         <div class="btn-group pull-right">
-            <?= Html::submitButton(Yii::t('domain', 'Search'), ['class' => 'btn btn-primary']) ?>
-            <?= Html::resetButton(Yii::t('domain', 'Reset'), ['class' => 'btn btn-default']) ?>
+            <?= Html::submitButton(Yii::t('yii', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::resetButton(Yii::t('yii', 'Reset'), ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 

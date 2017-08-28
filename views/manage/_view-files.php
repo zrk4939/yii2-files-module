@@ -1,6 +1,6 @@
 <?php
 
-use domain\helpers\ThumbnailHelper;
+use zrk4939\widgets\plupload\components\ThumbnailHelper;
 use zrk4939\modules\files\helpers\FilesHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
@@ -31,22 +31,22 @@ use yii\widgets\LinkPager;
             $template = "{$textBlock}\n{$file_icon}";
             if (!$frame) {
                 $openLink = Html::a("<i class='glyphicon glyphicon-search btn btn-default'></i>", $url, [
-                    'title' => Yii::t('domain', 'View'),
+                    'title' => Yii::t('yii', 'View'),
                     'class' => 'image-open fancybox',
                     'rel' => 'images images__image-link',
                 ]);
 
                 $editLink = Html::a("<i class='glyphicon glyphicon-edit btn btn-default'></i>", Url::to(['update', 'id' => $file->id]), [
-                    'title' => Yii::t('domain', 'Update'),
+                    'title' => Yii::t('yii', 'Update'),
                     'class' => 'file-edit',
                     'aria-label' => Yii::t('yii', 'Update'),
                     'data-pjax' => '0',
                 ]);
 
                 $deleteLink = Html::a("<i class='glyphicon glyphicon-trash btn btn-default'></i>", Url::to(['delete', 'id' => $file->id]), [
-                    'title' => Yii::t('domain', 'Delete'),
+                    'title' => Yii::t('yii', 'Delete'),
                     'class' => 'file-delete',
-                    'aria-label' => Yii::t('domain', 'Delete'),
+                    'aria-label' => Yii::t('yii', 'Delete'),
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'data-method' => 'post',
                     'data-pjax' => '0',
