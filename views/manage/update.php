@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model zrk4939\modules\files\models\File */
 
-$this->title = Yii::t('yii', 'Updating');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yii', 'Files'), 'url' => ['index']];
+$this->title = Yii::t('files', 'Updating');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('files', 'Files'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title
 ?>
 <div class="file-update">

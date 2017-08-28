@@ -73,13 +73,13 @@ class File extends \yii\db\ActiveRecord
 
         return [
             'id' => Yii::t('yii', 'ID'),
-            'path' => Yii::t('yii', 'Path'),
-            'filename' => Yii::t('yii', 'Filename'),
-            'mime' => Yii::t('yii', 'Mime Type'),
-            'title' => Yii::t('yii', 'Title'),
+            'path' => Yii::t('files', 'Path'),
+            'filename' => Yii::t('files', 'Filename'),
+            'mime' => Yii::t('files', 'Mime Type'),
+            'title' => Yii::t('files', 'Title'),
             'created_at' => Yii::t('yii', 'Created At'),
             'updated_at' => Yii::t('yii', 'Updated At'),
-            'status' => Yii::t('yii', 'Active'),
+            'status' => Yii::t('files', 'Active'),
         ];
     }
 

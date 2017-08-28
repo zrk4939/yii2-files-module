@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $frame boolean */
 /* @var $containerName string */
 
-$this->title = Yii::t('yii', 'Files');
+$this->title = Yii::t('files', 'Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'label' => Yii::t('yii', 'Upload'),
+                'label' => Yii::t('files', 'Upload'),
                 'content' => $this->render('_uploading', ['model' => $model]),
             ]
         ]
