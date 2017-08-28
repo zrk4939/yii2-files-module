@@ -6,7 +6,7 @@ use domain\helpers\ImageOptimization;
 use zrk4939\modules\files\FilesModule;
 use zrk4939\modules\files\forms\FilesForm;
 use zrk4939\modules\files\models\File;
-use domain\widgets\PluploadWidget\actions\PluploadAction;
+use zrk4939\widgets\plupload\actions\PluploadAction;
 use Yii;
 use yii\bootstrap\Html;
 use yii\data\Pagination;
