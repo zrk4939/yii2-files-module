@@ -42,3 +42,17 @@ to the repositories array of your `composer.json` file.
     ]
 ],
 ```
+
+### Widget
+
+```php
+<?php
+echo $form->field($model, 'images_arr')->widget(\zrk4939\modules\files\widget\FilesWidget::className(), [
+    'multiple' => true,
+    'files' => $model->images,
+    'types' => [
+        'image/*'
+    ]
+]);
+?>
+```
