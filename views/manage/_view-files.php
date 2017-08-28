@@ -1,5 +1,6 @@
 <?php
 
+use zrk4939\modules\files\assets\FilesAsset;
 use zrk4939\widgets\plupload\components\ThumbnailHelper;
 use zrk4939\modules\files\helpers\FilesHelper;
 use yii\bootstrap\Html;
@@ -11,11 +12,11 @@ use yii\widgets\LinkPager;
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
 
-\zrk4939\modules\files\assets\FilesAsset::register($this);
+FilesAsset::register($this);
 ?>
-<div class="">
-    <?= $pages->totalCount ?> записей всего
-</div>
+    <div class="">
+        <?= $pages->totalCount ?> записей всего
+    </div>
 
     <div class="files-wrapper">
         <?php
@@ -32,7 +33,9 @@ use yii\widgets\LinkPager;
             if (!$frame) {
                 $openLink = Html::a("<i class='glyphicon glyphicon-search btn btn-default'></i>", $url, [
                     'title' => Yii::t('yii', 'View'),
-                    'class' => 'image-open fancybox',
+                    'class' => 'image-open',
+                    'data-lightbox' => 'image-' . $file->id,
+                    'data-title' => $file->title,
                     'rel' => 'images images__image-link',
                 ]);
 
