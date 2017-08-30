@@ -70,7 +70,7 @@ class ManageController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex($types = [], $frame = false, $containerName = null)
+    public function actionIndex($types = [], $frame = false, $containerName = null, $CKEditor = null, $CKEditorFuncNum = null)
     {
         $query = $this->getFilesQuery($types);
         $countQuery = clone $query;
@@ -91,6 +91,8 @@ class ManageController extends Controller
             'pages' => $pages,
             'model' => $model,
             'frame' => $frame,
+            'CKEditor' => $CKEditor,
+            'CKEditorFuncNum' => $CKEditorFuncNum,
             'containerName' => $containerName,
         ];
 

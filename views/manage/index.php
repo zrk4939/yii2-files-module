@@ -10,6 +10,9 @@ use yii\helpers\Html;
 /* @var $frame boolean */
 /* @var $containerName string */
 
+/* @var $CKEditor string */
+/* @var $CKEditorFuncNum string */
+
 $this->title = Yii::t('files', 'Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'files' => $files,
                     'pages' => $pages,
                     'frame' => $frame,
+                    'CKEditor' => $CKEditor,
+                    'CKEditorFuncNum' => $CKEditorFuncNum,
                     'containerName' => $containerName
                 ]),
             ],

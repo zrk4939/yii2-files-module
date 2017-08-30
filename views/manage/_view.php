@@ -8,6 +8,9 @@ use yii\widgets\Pjax;
 /* @var $frame boolean */
 /* @var $containerName string */
 
+/* @var $CKEditor string */
+/* @var $CKEditorFuncNum string */
+
 $dataColumns = [
     ['class' => 'yii\grid\SerialColumn'],
     'preview:raw',
@@ -16,7 +19,8 @@ $dataColumns = [
 ];
 
 if ($frame) {
-    $script = <<<JS
+    if (!empty($containerName)) {
+        $script = <<<JS
 $('.file-one-row').on('click', function() {
     window.opener.{$containerName}.addFilePreview($(this));
     
@@ -27,9 +31,24 @@ $('.file-one-row').on('click', function() {
     return false;
 });
 JS;
-    $this->registerJs($script);
-} else {
-//    $dataColumns[] = ['class' => 'domain\helpers\ActionColumn']; TODO
+    }
+
+    if (!empty($CKEditor) && !empty($CKEditorFuncNum)) {
+        $script = <<<JS
+$('.file-one-row').on('click', function() {
+    var data = $(this),
+        path = data.data('file-path'),
+        filename = data.data('filename');
+    
+    window.opener.CKEDITOR.tools.callFunction( {$CKEditorFuncNum}, path + filename );
+    window.close();
+});
+JS;
+    }
+
+    if (!empty($script)) {
+        $this->registerJs($script);
+    }
 }
 
 ?>
