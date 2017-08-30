@@ -10,4 +10,6 @@ return [
     'Upload' => 'Загрузить',
     'Uploading' => 'Загрузка',
     '(not available)' => '(не доступно)',
+
+    'Select files' => 'Выбрать файлы',
 ];
