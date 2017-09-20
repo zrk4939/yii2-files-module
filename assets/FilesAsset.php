@@ -21,6 +21,6 @@ class FilesAsset extends AssetBundle
 
     public $depends = [
         'yii\web\YiiAsset',
-        'zrk4939\modules\files\assets\LightBoxAsset'
+        'zrk4939\lightbox\LightBoxAsset'
     ];
 }
