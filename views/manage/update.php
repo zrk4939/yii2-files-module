@@ -1,6 +1,5 @@
 <?php
 
-use kartik\switchinput\SwitchInput;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
@@ -30,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'status')->widget(SwitchInput::className()) ?>
+                <?= $form->field($model, 'status')->checkbox() ?>
 
                 <div class="form-group clearfix">
                     <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
