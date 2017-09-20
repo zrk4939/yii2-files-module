@@ -1,7 +1,7 @@
 <?php
 
 use zrk4939\modules\files\assets\FilesAsset;
-use zrk4939\widgets\plupload\components\ThumbnailHelper;
+use zrk4939\helpers\ThumbnailHelper;
 use zrk4939\modules\files\helpers\FilesHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
