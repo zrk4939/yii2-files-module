@@ -23,6 +23,8 @@ use yii\helpers\FileHelper;
  *
  * @property boolean $isImage
  * @property string $preview
+ *
+ * @property string $fullPath
  */
 class File extends \yii\db\ActiveRecord
 {
@@ -110,6 +112,14 @@ class File extends \yii\db\ActiveRecord
                 'class' => 'fancybox',
             ]
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullPath()
+    {
+        return Yii::$app->params['frontendUrl'] . $this->path . $this->filename;
     }
 
     /**
