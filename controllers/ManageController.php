@@ -2,7 +2,7 @@
 
 namespace zrk4939\modules\files\controllers;
 
-use zrk4939\widgets\plupload\components\ImageOptimization;
+use zrk4939\helpers\ImageOptimization;
 use zrk4939\modules\files\FilesModule;
 use zrk4939\modules\files\forms\FilesForm;
 use zrk4939\modules\files\models\File;
