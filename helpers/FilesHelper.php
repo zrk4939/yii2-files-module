@@ -43,4 +43,21 @@ class FilesHelper extends Object
 
         return $icon;
     }
+
+    public static function getVideoCodecs($mime)
+    {
+        switch ($mime) {
+            case 'video/mp4': {
+                return "avc1.42E01E, mp4a.40.2";
+            }
+            case 'video/webm': {
+                return "vp8, vorbis";
+            }
+            case 'video/ogv': {
+                return "theora, vorbis";
+            }
+        }
+
+        return null;
+    }
 }

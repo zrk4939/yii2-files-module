@@ -2,6 +2,7 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use zrk4939\modules\files\helpers\FilesHelper;
 
 /* @var $this yii\web\View */
 /* @var $model zrk4939\modules\files\models\File */
@@ -17,12 +18,20 @@ $this->params['breadcrumbs'][] = $this->title
         <?php $form = ActiveForm::begin(); ?>
 
         <div class="row">
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-5">
                 <div class="form-group">
-                    <?= Html::img($model->path . $model->filename) ?>
+                    <?= ($model->isImage) ? Html::img($model->path . $model->filename) : null ?>
+
+                    <?php if (preg_match('/video/msiu', $model->mime)): ?>
+                        <video loop controls tabindex="0">
+                            <source src="<?= $model->path . $model->filename ?>"
+                                    type='<?= $model->mime ?>; codecs="<?= FilesHelper::getVideoCodecs($model->mime) ?>"'/>
+                        </video>
+                    <?php endif; ?>
+
                 </div>
             </div>
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-7">
                 <?= $form->field($model, 'path')->textInput(['readonly' => true]) ?>
 
                 <?= $form->field($model, 'filename')->textInput(['readonly' => true]) ?>
