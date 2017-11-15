@@ -17,6 +17,7 @@ use zrk4939\modules\files\helpers\ThumbnailHelper;
  * @property integer $parent_id
  * @property string $path
  * @property string $filename
+ * @property string $preview_key
  * @property string $title
  * @property string $mime
  * @property integer $filesize
@@ -50,7 +51,7 @@ class File extends \yii\db\ActiveRecord
             [['parent_id'], 'integer'],
             [['filesize'], 'integer'],
             [['path', 'filename', 'mime'], 'required'],
-            [['path', 'filename', 'title'], 'string', 'max' => 255],
+            [['path', 'filename', 'title', 'preview_key'], 'string', 'max' => 255],
             [['mime'], 'string', 'max' => 45],
             [['status'], 'boolean'],
             [['status'], 'default', 'value' => 1],
@@ -82,6 +83,7 @@ class File extends \yii\db\ActiveRecord
             'id' => Yii::t('yii', 'ID'),
             'parent_id' => Yii::t('files', 'Parent'),
             'path' => Yii::t('files', 'Path'),
+            'preview_key' => Yii::t('files', 'Prefix'),
             'filename' => Yii::t('files', 'Filename'),
             'mime' => Yii::t('files', 'Mime Type'),
             'title' => Yii::t('files', 'Title'),
@@ -92,11 +94,19 @@ class File extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return string
+     * @return ActiveQuery
      */
     public function getPreviews()
     {
         return $this->hasMany(File::className(), ['parent_id' => 'id']);
+    }
+
+    /**
+     * @return File
+     */
+    public function getPreview($key)
+    {
+        return $this->hasOne(File::className(), ['parent_id' => 'id'])->andWhere(['preview_key' => $key])->one();
     }
 
     /**
@@ -173,6 +183,7 @@ class File extends \yii\db\ActiveRecord
             $previewFile->parent_id = $this->id;
             $previewFile->path = $this->path;
             $previewFile->filename = $prefix . '_' . $this->filename;
+            $previewFile->preview_key = $prefix;
             $previewFile->status = 1;
             $previewFile->filesize = filesize($previewFilePath);
             $previewFile->mime = FileHelper::getMimeType($previewFilePath);
