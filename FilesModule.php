@@ -10,6 +10,14 @@ class FilesModule extends \yii\base\Module
     public $extensions = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt'];
     public $tempDirectory = '/uploads/temp/';
 
+    public $thumbs = [
+        'preview' => [
+            'width' => 250,
+            'height' => 180,
+            'cropAndCenter' => true
+        ],
+    ];
+
     /**
      * @inheritdoc
      */
@@ -26,6 +34,11 @@ class FilesModule extends \yii\base\Module
     public static function getTempDirectory()
     {
         return self::getInstance()->tempDirectory;
+    }
+
+    public static function getThumbs()
+    {
+        return self::getInstance()->thumbs;
     }
 
     /**

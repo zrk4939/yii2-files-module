@@ -14,6 +14,11 @@ class FileQuery extends \yii\db\ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+    public function mainImages()
+    {
+        return $this->andWhere(['parent_id' => null]);
+    }
+
     /**
      * @inheritdoc
      * @return File[]|array

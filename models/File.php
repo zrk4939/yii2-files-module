@@ -7,11 +7,14 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\bootstrap\Html;
 use yii\helpers\FileHelper;
+use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\helpers\ThumbnailHelper;
 
 /**
  * This is the model class for table "{{%file}}".
  *
  * @property integer $id
+ * @property integer $parent_id
  * @property string $path
  * @property string $filename
  * @property string $title
@@ -21,10 +24,11 @@ use yii\helpers\FileHelper;
  * @property integer $updated_at
  * @property integer $status
  *
- * @property boolean $isImage
- * @property string $preview
+ * @property File[] $previews
  *
  * @property string $fullPath
+ * @property boolean $isImage
+ * @property boolean isPreview
  */
 class File extends \yii\db\ActiveRecord
 {
@@ -42,7 +46,8 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['filename'], 'unique'],
+//            [['filename'], 'unique'],
+            [['parent_id'], 'integer'],
             [['filesize'], 'integer'],
             [['path', 'filename', 'mime'], 'required'],
             [['path', 'filename', 'title'], 'string', 'max' => 255],
@@ -75,6 +80,7 @@ class File extends \yii\db\ActiveRecord
 
         return [
             'id' => Yii::t('yii', 'ID'),
+            'parent_id' => Yii::t('files', 'Parent'),
             'path' => Yii::t('files', 'Path'),
             'filename' => Yii::t('files', 'Filename'),
             'mime' => Yii::t('files', 'Mime Type'),
@@ -86,32 +92,11 @@ class File extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return boolean
-     */
-    public function getIsImage()
-    {
-        return (boolean)preg_match('/^image/msiu', $this->mime);
-    }
-
-    /**
      * @return string
      */
-    public function getPreview()
+    public function getPreviews()
     {
-        if (!$this->isImage) {
-            return Html::tag('span', Yii::t('yii', '(not available)'), ['class' => 'not-set']);
-        }
-
-        $url = '/uploads' . $this->path . $this->filename;
-
-        return Html::a(
-            Html::img($url, ['alt' => $this->title, 'width' => 100, 'height' => 100]),
-            $url,
-            [
-                'title' => $this->title,
-                'class' => 'fancybox',
-            ]
-        );
+        return $this->hasMany(File::className(), ['parent_id' => 'id']);
     }
 
     /**
@@ -120,6 +105,22 @@ class File extends \yii\db\ActiveRecord
     public function getFullPath()
     {
         return Yii::$app->params['frontendUrl'] . $this->path . $this->filename;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsImage()
+    {
+        return (bool)preg_match('/^image/msiu', $this->mime);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsPreview()
+    {
+        return (bool)(!empty($this->parent_id));
     }
 
     /**
@@ -140,6 +141,43 @@ class File extends \yii\db\ActiveRecord
             $this->mime = FileHelper::getMimeType(Yii::getAlias('@approot') . $this->path . $this->filename);
         }
 
+        if (empty($this->filesize)) {
+            $this->filesize = filesize(Yii::getAlias('@approot') . $this->path . $this->filename);
+        }
+
         return parent::beforeValidate();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if (!$this->isPreview) {
+            $this->generatePreviews();
+        }
+
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    private function generatePreviews()
+    {
+        $thumbs = FilesModule::getThumbs();
+        foreach ($thumbs as $prefix => $sizes) {
+            $uploadPath = Yii::getAlias('@approot' . $this->path);
+            ThumbnailHelper::createImageThumbnails($uploadPath, $this->filename, $prefix, $sizes);
+
+            $previewFilePath = $uploadPath . $prefix . '_' . $this->filename;
+
+            $previewFile = new File();
+            $previewFile->parent_id = $this->id;
+            $previewFile->path = $this->path;
+            $previewFile->filename = $prefix . '_' . $this->filename;
+            $previewFile->status = 1;
+            $previewFile->filesize = filesize($previewFilePath);
+            $previewFile->mime = FileHelper::getMimeType($previewFilePath);
+
+            $previewFile->save();
+        }
     }
 }

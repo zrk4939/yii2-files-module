@@ -157,7 +157,8 @@ class ManageController extends Controller
      */
     private function getFilesQuery($mimeTypes = [])
     {
-        $query = File::find();
+        $query = File::find()
+            ->mainImages();
 
         if (!empty($mimeTypes)) {
             $types = Json::decode($mimeTypes);

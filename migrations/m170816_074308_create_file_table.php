@@ -14,6 +14,7 @@ class m170816_074308_create_file_table extends Migration
     {
         $this->createTable('file', [
             'id' => $this->primaryKey(),
+            'parent_id' => $this->integer(),
             'path' => $this->string(255)->notNull(),
             'filename' => $this->string(255)->notNull()->unique(),
             'filesize' => $this->integer()->notNull(),
