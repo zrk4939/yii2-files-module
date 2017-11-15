@@ -73,6 +73,9 @@ class ManageController extends Controller
     public function actionIndex($types = [], $frame = false, $containerName = null, $CKEditor = null, $CKEditorFuncNum = null)
     {
         $query = $this->getFilesQuery($types);
+
+        $sql = $query->createCommand()->rawSql;
+
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 50]);
         $files = $query->offset($pages->offset)
@@ -164,7 +167,7 @@ class ManageController extends Controller
             $types = Json::decode($mimeTypes);
 
             foreach ($types as $type) {
-                $query->orFilterWhere(['like', 'mime', str_replace('*', '%', $type), false]);
+                $query->andFilterWhere(['like', 'mime', str_replace('*', '%', $type), false]);
             }
         }
 
