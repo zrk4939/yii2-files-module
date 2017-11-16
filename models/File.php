@@ -147,6 +147,10 @@ class File extends \yii\db\ActiveRecord
      */
     public function beforeValidate()
     {
+        if (!file_exists($this->path . $this->filename)) {
+            $this->addError('path', 'Файл не найден!');
+        }
+
         if (empty($this->mime)) {
             $this->mime = FileHelper::getMimeType(Yii::getAlias('@approot') . $this->path . $this->filename);
         }
@@ -179,16 +183,18 @@ class File extends \yii\db\ActiveRecord
 
             $previewFilePath = $uploadPath . $prefix . '_' . $this->filename;
 
-            $previewFile = new File();
-            $previewFile->parent_id = $this->id;
-            $previewFile->path = $this->path;
-            $previewFile->filename = $prefix . '_' . $this->filename;
-            $previewFile->preview_key = $prefix;
-            $previewFile->status = 1;
-            $previewFile->filesize = filesize($previewFilePath);
-            $previewFile->mime = FileHelper::getMimeType($previewFilePath);
+            if (file_exists($previewFilePath)){
+                $previewFile = new File();
+                $previewFile->parent_id = $this->id;
+                $previewFile->path = $this->path;
+                $previewFile->filename = $prefix . '_' . $this->filename;
+                $previewFile->preview_key = $prefix;
+                $previewFile->status = 1;
+                $previewFile->filesize = filesize($previewFilePath);
+                $previewFile->mime = FileHelper::getMimeType($previewFilePath);
 
-            $previewFile->save();
+                $previewFile->save();
+            }
         }
     }
 }
