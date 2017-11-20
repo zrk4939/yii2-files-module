@@ -147,7 +147,7 @@ class File extends \yii\db\ActiveRecord
      */
     public function beforeValidate()
     {
-        if (!file_exists($this->path . $this->filename)) {
+        if (!file_exists(Yii::getAlias('@approot' . $this->path . $this->filename))) {
             $this->addError('path', 'Файл не найден!');
         }
 
@@ -183,7 +183,7 @@ class File extends \yii\db\ActiveRecord
 
             $previewFilePath = $uploadPath . $prefix . '_' . $this->filename;
 
-            if (file_exists($previewFilePath)){
+            if (file_exists($previewFilePath)) {
                 $previewFile = new File();
                 $previewFile->parent_id = $this->id;
                 $previewFile->path = $this->path;
