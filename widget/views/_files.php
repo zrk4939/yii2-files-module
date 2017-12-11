@@ -9,16 +9,12 @@ use yii\bootstrap\Html;
 
 
 if (!empty($files)) {
-    foreach ($files as $file) {
-        $class = $file->isImage ? 'preview-file image' : 'preview-file';
-        $input = Html::input('hidden', $inputName, $file->id);
-        $cancel = Html::a("", '#', ['class' => 'glyphicon glyphicon-remove cancel']);
-        $text = $file->isImage ? '' : $file->filename;
-
-        echo Html::tag('div', "{$text}\n{$cancel}\n{$input}", [
-            'class' => $class,
-            'style' => "background-image:url('{$file->path}{$file->filename}')"
-        ]) . "\n";
+    if ($multiple && is_array($files)) {
+        foreach ($files as $file) {
+            echo $this->render('_files-one', ['file' => $file, 'inputName' => $inputName]);
+        }
+    } elseif (!$multiple && is_object($files)) {
+        echo $this->render('_files-one', ['file' => $files, 'inputName' => $inputName]);
     }
 } else {
     echo Html::tag('span', Yii::t('yii', '(not set)'), ['class' => 'not-set']);

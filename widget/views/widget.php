@@ -19,7 +19,9 @@ $frameUrl = Url::to(['/files/manage/index', 'types' => \yii\helpers\Json::encode
 FilesWidgetAsset::register($this);
 
 echo Html::activeHiddenInput($model, $attribute, ['class' => 'modal-files-input', 'value' => '']);
-echo Html::tag('div', $this->render("_files", ['files' => $files, 'inputName' => $inputName]), ['id' => $inputId . '-preview', 'class' => 'form-group']);
+
+$filesView = $this->render("_files", ['files' => $files, 'inputName' => $inputName, 'multiple' => $multiple]);
+echo Html::tag('div', $filesView, ['id' => $inputId . '-preview', 'class' => 'form-group']);
 
 echo Html::a(Yii::t('files', 'Select files'), '#', [
     'id' => $inputId . '-frame',
