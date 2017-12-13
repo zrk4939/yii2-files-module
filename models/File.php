@@ -147,16 +147,20 @@ class File extends \yii\db\ActiveRecord
      */
     public function beforeValidate()
     {
-        if (!file_exists(Yii::getAlias('@approot' . $this->path . $this->filename))) {
+        $filePath = strrpos($this->path, '/', strlen($this->path) - 1)
+            ? $this->path . $this->filename
+            : $this->path . '/' . $this->filename;
+
+        if (!file_exists(Yii::getAlias('@approot' . $filePath))) {
             $this->addError('path', 'Файл не найден!');
         }
 
         if (empty($this->mime)) {
-            $this->mime = FileHelper::getMimeType(Yii::getAlias('@approot') . $this->path . $this->filename);
+            $this->mime = FileHelper::getMimeType(Yii::getAlias('@approot') . $filePath);
         }
 
         if (empty($this->filesize)) {
-            $this->filesize = filesize(Yii::getAlias('@approot') . $this->path . $this->filename);
+            $this->filesize = filesize(Yii::getAlias('@approot') . $filePath);
         }
 
         return parent::beforeValidate();
