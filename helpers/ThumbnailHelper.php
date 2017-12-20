@@ -16,14 +16,21 @@ class ThumbnailHelper extends Object
     /**
      * @param string $imagesDir
      * @param string $item
-     * @param string $prefix
+     * @param string $thumb_key
      * @param array $sizes
      */
-    public static function createImageThumbnails(string $imagesDir, string $item, string $prefix, array $sizes)
+    public static function createImageThumbnail(string $imagesDir, string $item, string $thumb_key, array $sizes)
     {
-        $thumbFileName = $prefix . '_' . $item;
+        $thumbFileName = $thumb_key . '_' . $item;
+
         if (!file_exists($imagesDir . $thumbFileName)) {
-            self::generateImageThumbnail($imagesDir . $item, $imagesDir . $thumbFileName, $sizes['width'], $sizes['height'], $sizes['cropAndCenter']);
+            self::generateImageThumbnail(
+                $imagesDir . $item,
+                $imagesDir . $thumbFileName,
+                $sizes['width'],
+                isset($sizes['height']) ? $sizes['height'] : null,
+                isset($sizes['cropAndCenter']) ? $sizes['cropAndCenter'] : null
+            );
         }
     }
 

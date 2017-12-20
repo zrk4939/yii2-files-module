@@ -2,6 +2,7 @@
 
 namespace zrk4939\modules\files\models;
 
+use yii\base\InvalidParamException;
 use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -94,7 +95,7 @@ class File extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return ActiveQuery
+     * @return yii\db\ActiveQuery
      */
     public function getPreviews()
     {
@@ -106,7 +107,13 @@ class File extends \yii\db\ActiveRecord
      */
     public function getPreview($key)
     {
-        return $this->hasOne(File::className(), ['parent_id' => 'id'])->andWhere(['preview_key' => $key])->one();
+        $preview = $this->hasOne(File::className(), ['parent_id' => 'id'])->andWhere(['preview_key' => $key])->one();
+
+        if (empty($preview)) {
+            $preview = $this->generatePreview($key);
+        }
+
+        return $preview;
     }
 
     /**
@@ -167,38 +174,37 @@ class File extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * @param string $key
+     * @return FileThumb
+     * @throws \Exception
      */
-    public function afterSave($insert, $changedAttributes)
+    private function generatePreview(string $key)
     {
-        if (!$this->isPreview) {
-            $this->generatePreviews();
+        $sizes = FilesModule::getPreviewSizes($key);
+        if (empty($sizes)) {
+            throw new InvalidParamException("Preview key settings not found for key «{$key}»");
         }
 
-        parent::afterSave($insert, $changedAttributes);
-    }
+        $file_path = Yii::getAlias('@approot' . $this->path);
+        ThumbnailHelper::createImageThumbnail($file_path, $this->filename, $key, $sizes);
 
-    private function generatePreviews()
-    {
-        $thumbs = FilesModule::getThumbs();
-        foreach ($thumbs as $prefix => $sizes) {
-            $uploadPath = Yii::getAlias('@approot' . $this->path);
-            ThumbnailHelper::createImageThumbnails($uploadPath, $this->filename, $prefix, $sizes);
+        $thumbFileName = $key . '_' . $this->filename;
+        $previewFilePath = $file_path . $thumbFileName;
+        if (file_exists($previewFilePath)) {
+            $previewFile = new FileThumb();
+            $previewFile->parent_id = $this->id;
+            $previewFile->path = $this->path;
+            $previewFile->filename = $thumbFileName;
+            $previewFile->preview_key = $key;
+            $previewFile->status = 1;
+            $previewFile->filesize = filesize($previewFilePath);
+            $previewFile->mime = FileHelper::getMimeType($previewFilePath);
 
-            $previewFilePath = $uploadPath . $prefix . '_' . $this->filename;
+            $previewFile->save();
 
-            if (file_exists($previewFilePath)) {
-                $previewFile = new File();
-                $previewFile->parent_id = $this->id;
-                $previewFile->path = $this->path;
-                $previewFile->filename = $prefix . '_' . $this->filename;
-                $previewFile->preview_key = $prefix;
-                $previewFile->status = 1;
-                $previewFile->filesize = filesize($previewFilePath);
-                $previewFile->mime = FileHelper::getMimeType($previewFilePath);
-
-                $previewFile->save();
-            }
+            return $previewFile;
         }
+
+        throw new \Exception("Failed to create preview with key «{$key}»");
     }
 }

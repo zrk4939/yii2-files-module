@@ -1,6 +1,7 @@
 <?php
 
 namespace zrk4939\modules\files;
+use yii\helpers\ArrayHelper;
 
 /**
  * files module definition class
@@ -10,13 +11,17 @@ class FilesModule extends \yii\base\Module
     public $extensions = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt'];
     public $tempDirectory = '/uploads/temp/';
 
-    public $thumbs = [
-        'preview' => [
-            'width' => 250,
-            'height' => 180,
-            'cropAndCenter' => true
-        ],
-    ];
+    /**
+     * @var array
+     * [
+     * 'preview' => [
+     *      'width' => 250,
+     *      'height' => 180,
+     *      'cropAndCenter' => true
+     * ],
+     * ]
+     */
+    public $thumbs = [];
 
     /**
      * @inheritdoc
@@ -39,6 +44,15 @@ class FilesModule extends \yii\base\Module
     public static function getThumbs()
     {
         return self::getInstance()->thumbs;
+    }
+
+    /**
+     * @param string $key
+     * @return array
+     */
+    public static function getPreviewSizes(string $key)
+    {
+        return ArrayHelper::getValue(self::getThumbs(), $key);
     }
 
     /**
