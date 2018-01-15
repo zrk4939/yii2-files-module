@@ -48,7 +48,7 @@ filesContainer.prototype.addFilePreview = function (fileRow) {
         $previewFile = $("<div />")
             .addClass('preview-file')
             .addClass('image')
-            .css({'background-image': 'url("' + filePath + fileName + '")'});
+            .css({'background-image': 'url("' + filePath + '")'});
     } else {
         $previewFile = $("<div />")
             .addClass('preview-file')

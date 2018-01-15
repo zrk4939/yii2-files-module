@@ -58,7 +58,7 @@ FilesAsset::register($this);
             $class = $file->isImage ? 'images__image' : 'images__file';
             $options = [
                 'data-file-id' => $file->id,
-                'data-file-path' => $file->path,
+                'data-file-path' => $file->fullPath,
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',
