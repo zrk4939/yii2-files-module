@@ -1,6 +1,7 @@
 <?php
 
 namespace zrk4939\modules\files;
+
 use yii\helpers\ArrayHelper;
 
 /**
@@ -9,7 +10,8 @@ use yii\helpers\ArrayHelper;
 class FilesModule extends \yii\base\Module
 {
     public $extensions = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt'];
-    public $tempDirectory = '/uploads/temp/';
+    public $tempDirectory = '@uploads/temp';
+    public $rootAlias = '@webroot';
 
     /**
      * @var array
@@ -44,6 +46,11 @@ class FilesModule extends \yii\base\Module
     public static function getThumbs()
     {
         return self::getInstance()->thumbs;
+    }
+
+    public static function getRootAlias()
+    {
+        return self::getInstance()->rootAlias;
     }
 
     /**

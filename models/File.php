@@ -121,7 +121,11 @@ class File extends \yii\db\ActiveRecord
      */
     public function getFullPath()
     {
-        return Yii::$app->params['frontendUrl'] . $this->path . $this->filename;
+        $filePath = strrpos($this->path, '/', strlen($this->path) - 1)
+            ? $this->path . $this->filename
+            : $this->path . '/' . $this->filename;
+
+        return Yii::$app->params['frontendUrl'] . $filePath;
     }
 
     /**
@@ -158,16 +162,18 @@ class File extends \yii\db\ActiveRecord
             ? $this->path . $this->filename
             : $this->path . '/' . $this->filename;
 
-        if (!file_exists(Yii::getAlias('@approot' . $filePath))) {
+        $root = Yii::getAlias(FilesModule::getRootAlias());
+
+        if (!file_exists($root . $filePath)) {
             $this->addError('path', 'Файл не найден!');
         }
 
         if (empty($this->mime)) {
-            $this->mime = FileHelper::getMimeType(Yii::getAlias('@approot') . $filePath);
+            $this->mime = FileHelper::getMimeType($root . $filePath);
         }
 
         if (empty($this->filesize)) {
-            $this->filesize = filesize(Yii::getAlias('@approot') . $filePath);
+            $this->filesize = filesize($root . $filePath);
         }
 
         return parent::beforeValidate();

@@ -22,16 +22,13 @@ FilesAsset::register($this);
         <?php
         // TODO ЭТО ВСЕ НУЖНО В ВИДЖЕТ
         foreach ($files as $file) {
-            $url = $file->path . $file->filename;
-            $previewUrl = $file->path . ThumbnailHelper::getImageThumbNail(Yii::getAlias('@approot' . $file->path), $file->filename);
-
             $textBlock = Html::tag('span', $file->filename, ['class' => 'files__filename']);
             $file_icon = FilesHelper::getFontAwesomeFileIcon($file);
             $file_icon = Html::tag('i', '', ['class' => $file_icon]);
 
             $template = "{$textBlock}\n{$file_icon}";
             if (!$frame) {
-                $openLink = Html::a("<i class='glyphicon glyphicon-search btn btn-default'></i>", $url, [
+                $openLink = Html::a("<i class='glyphicon glyphicon-search btn btn-default'></i>", $file->fullPath, [
                     'title' => Yii::t('yii', 'View'),
                     'class' => 'image-open',
                     'data-lightbox' => 'image-' . $file->id,
@@ -65,7 +62,7 @@ FilesAsset::register($this);
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',
-                'style' => $file->isImage ? "background-image: url('{$previewUrl}')" : null,
+                'style' => $file->isImage ? "background-image: url('{$file->fullPath}')" : null,
 
             ];
 

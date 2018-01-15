@@ -9,6 +9,7 @@
 namespace zrk4939\modules\files\behaviors;
 
 
+use zrk4939\modules\files\FilesModule;
 use zrk4939\modules\files\models\File;
 use Yii;
 use yii\base\Behavior;
@@ -19,7 +20,7 @@ use yii\db\ActiveRecord;
 class UploadFilesBehavior extends Behavior
 {
     public $attribute;
-    public $moveTo = 'uploads/files';
+    public $moveTo = '@uploads/files';
 
     /**
      * @inheritdoc
@@ -53,9 +54,10 @@ class UploadFilesBehavior extends Behavior
         /* @var $model File */
         $model = $event->sender;
 
-        $uploadDir = Yii::getAlias('@approot');
-        $moveFrom = $uploadDir . $model->path . '/';
-        $moveTo = $uploadDir . '/' . $this->moveTo . '/' . strtotime(date("d.m.Y", time())) . '/';
+        $root = Yii::getAlias(FilesModule::getRootAlias());
+        $uploadDir = Yii::getAlias($this->moveTo);
+        $moveFrom = $root . $model->path;
+        $moveTo = $uploadDir . DIRECTORY_SEPARATOR . strtotime(date("d.m.Y", time()));
 
         if (!is_dir($moveFrom)) {
             mkdir($moveFrom, 0775, true);
@@ -65,11 +67,13 @@ class UploadFilesBehavior extends Behavior
             mkdir($moveTo, 0775, true);
         }
 
-        $fileFrom = $moveFrom . $model->filename;
-        $fileTo = $moveTo . $model->filename;
+        $fileFrom = $moveFrom . DIRECTORY_SEPARATOR . $model->filename;
+        $fileTo = $moveTo . DIRECTORY_SEPARATOR . $model->filename;
 
         if (file_exists($fileFrom) && rename($fileFrom, $fileTo)) {
-            $model->path = current(array_slice(mb_split(str_replace('/', '\/', $uploadDir), $moveTo), 1, 1)); // TODO Нужно что-то получше
+            $info = pathinfo($fileTo);
+
+            $model->path = str_replace($root, '', $info['dirname']);
         }
     }
 
@@ -81,7 +85,7 @@ class UploadFilesBehavior extends Behavior
         /* @var $model File */
         $model = $event->sender;
 
-        $deleteFile = Yii::getAlias('@approot' . $model->path . $model->filename);
+        $deleteFile = Yii::getAlias('@uploads' . $model->path . $model->filename);
 
         if (file_exists($deleteFile) && is_file($deleteFile)) {
             unlink($deleteFile);

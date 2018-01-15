@@ -42,17 +42,18 @@ class FilesForm extends Model
         ];
 
         if (!empty($this->files_arr)) {
-            $tempDir = Yii::getAlias('@approot') . FilesModule::getTempDirectory(); // TODO в конфиг
+            $tempDir = Yii::getAlias(FilesModule::getTempDirectory());
 
             foreach ($this->files_arr as $fileName) {
-                $filePath = $tempDir . $fileName;
+                $filePath = $tempDir . DIRECTORY_SEPARATOR . $fileName;
 
                 if (file_exists($filePath) && is_file($filePath)) {
                     $info = pathinfo($filePath);
-                    $uploadDir = Yii::getAlias('@approot');
+
+                    $root = Yii::getAlias(FilesModule::getRootAlias());
 
                     $model = new File();
-                    $model->path = current(array_slice(mb_split(str_replace('/', '\/', $uploadDir), $info['dirname']), 1, 1));  // TODO Нужно что-то получше
+                    $model->path = str_replace($root, '', $info['dirname']);
                     $model->filename = $info['basename'];
                     $model->status = 1;
                     $model->mime = FileHelper::getMimeType($filePath);
