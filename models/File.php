@@ -191,7 +191,7 @@ class File extends \yii\db\ActiveRecord
             throw new InvalidParamException("Preview key settings not found for key «{$key}»");
         }
 
-        $file_path = Yii::getAlias('@approot' . $this->path);
+        $file_path = Yii::getAlias(FilesModule::getRootAlias() . $this->path);
         ThumbnailHelper::createImageThumbnail($file_path, $this->filename, $key, $sizes);
 
         $thumbFileName = $key . '_' . $this->filename;
