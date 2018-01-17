@@ -53,7 +53,7 @@ class FilesForm extends Model
                     $root = Yii::getAlias(FilesModule::getRootAlias());
 
                     $model = new File();
-                    $model->path = str_replace($root, '', $info['dirname']);
+                    $model->path = str_replace($root, '', $info['dirname']) . '/';
                     $model->filename = $info['basename'];
                     $model->status = 1;
                     $model->mime = FileHelper::getMimeType($filePath);

@@ -158,22 +158,22 @@ class File extends \yii\db\ActiveRecord
      */
     public function beforeValidate()
     {
-        $filePath = strrpos($this->path, '/', strlen($this->path) - 1)
-            ? $this->path . $this->filename
-            : $this->path . '/' . $this->filename;
+        $this->path = strrpos($this->path, '/', strlen($this->path) - 1)
+            ? $this->path
+            : $this->path . '/';
 
-        $root = Yii::getAlias(FilesModule::getRootAlias());
+        $path = Yii::getAlias(FilesModule::getRootAlias()) . $this->path . $this->filename;
 
-        if (!file_exists($root . $filePath)) {
+        if (!file_exists($path)) {
             $this->addError('path', 'Файл не найден!');
         }
 
         if (empty($this->mime)) {
-            $this->mime = FileHelper::getMimeType($root . $filePath);
+            $this->mime = FileHelper::getMimeType($path);
         }
 
         if (empty($this->filesize)) {
-            $this->filesize = filesize($root . $filePath);
+            $this->filesize = filesize($path);
         }
 
         return parent::beforeValidate();
