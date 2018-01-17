@@ -73,7 +73,7 @@ class UploadFilesBehavior extends Behavior
         if (file_exists($fileFrom) && rename($fileFrom, $fileTo)) {
             $info = pathinfo($fileTo);
 
-            $model->path = str_replace($root, '', $info['dirname']);
+            $model->path = str_replace($root, '', $info['dirname']) . '/';
         }
     }
 
