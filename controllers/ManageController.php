@@ -74,8 +74,6 @@ class ManageController extends Controller
     {
         $query = $this->getFilesQuery($types);
 
-        $sql = $query->createCommand()->rawSql;
-
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 50]);
         $files = $query->offset($pages->offset)
