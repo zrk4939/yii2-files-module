@@ -3,6 +3,7 @@
 namespace zrk4939\modules\files\models;
 
 use yii\base\InvalidParamException;
+use zrk4939\modules\files\behaviors\FileNameBehavior;
 use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -68,6 +69,10 @@ class File extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
             [
                 'class' => UploadFilesBehavior::className(),
+                'attribute' => 'filename',
+            ],
+            [
+                'class' => FileNameBehavior::className(),
                 'attribute' => 'filename',
             ],
         ];

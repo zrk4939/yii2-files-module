@@ -59,6 +59,10 @@ class FilesForm extends Model
                     $model->mime = FileHelper::getMimeType($filePath);
                     $model->filesize = filesize($filePath);
 
+                    $model->validate();
+                    $uniquePath = $info['dirname'] . DIRECTORY_SEPARATOR . $model->filename;
+                    rename($filePath, $uniquePath); // TODO все эти действия производить в событиях
+
                     if (!$model->save()) {
                         $result['errors'][$fileName] = $model->getErrors();
                     }
