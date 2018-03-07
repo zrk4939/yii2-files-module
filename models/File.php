@@ -127,9 +127,13 @@ class File extends \yii\db\ActiveRecord
      */
     public function getFullPath()
     {
-        return strrpos($this->path, '/', strlen($this->path) - 1)
+        $mod = FilesModule::getInstance();
+
+        $urlPath = strrpos($this->path, '/', strlen($this->path) - 1)
             ? $this->path . $this->filename
             : $this->path . '/' . $this->filename;
+
+        return $mod->staticHost ? $mod->staticHost . $urlPath : $urlPath;
     }
 
     /**

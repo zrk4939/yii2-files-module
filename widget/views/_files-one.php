@@ -13,9 +13,7 @@ $cancel = Html::a("", '#', ['class' => 'glyphicon glyphicon-remove cancel']);
 $text = $file->isImage ? '' : $file->filename;
 
 // TODO background-image only for images files
-$file_url = $staticHost ? $staticHost . $file->fullPath : $file->fullPath;
-
 echo Html::tag('div', "{$text}\n{$cancel}\n{$input}", [
         'class' => $class,
-        'style' => "background-image:url('{$file_url}')"
+        'style' => "background-image:url('{$file->fullPath}')"
     ]) . "\n";

@@ -59,10 +59,9 @@ FilesAsset::register($this);
             $class = $file->isImage ? 'images__image' : 'images__file';
 
             // TODO background-image only for images files
-            $file_url = $staticHost ? $staticHost . $file->fullPath : $file->fullPath;
             $options = [
                 'data-file-id' => $file->id,
-                'data-file-url' => $file_url,
+                'data-file-url' => $file->fullPath,
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',
