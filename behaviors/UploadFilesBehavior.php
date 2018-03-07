@@ -9,18 +9,18 @@
 namespace zrk4939\modules\files\behaviors;
 
 
-use zrk4939\modules\files\FilesModule;
-use zrk4939\modules\files\models\File;
 use Yii;
 use yii\base\Behavior;
 use yii\base\InvalidParamException;
 use yii\base\ModelEvent;
 use yii\db\ActiveRecord;
+use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\models\File;
 
 class UploadFilesBehavior extends Behavior
 {
     public $attribute;
-    public $moveTo = '@uploads/files';
+    public $moveTo;
 
     /**
      * @inheritdoc
@@ -29,6 +29,10 @@ class UploadFilesBehavior extends Behavior
     {
         if (empty($this->attribute)) {
             throw new InvalidParamException("Param UploadFilesBehavior::attribute can not be empty.");
+        }
+
+        if (empty($this->moveTo)) {
+            throw new InvalidParamException("Param UploadFilesBehavior::moveTo can not be empty.");
         }
 
         parent::init();

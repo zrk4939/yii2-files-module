@@ -10,6 +10,7 @@ use yii\helpers\Url;
 /* @var $multiple boolean */
 /* @var $files \zrk4939\modules\files\models\File[] */
 /* @var array $types */
+/* @var $staticHost string */
 
 $inputName = ($multiple) ? Html::getInputName($model, $attribute) . '[]' : Html::getInputName($model, $attribute);
 $inputId = Html::getInputId($model, $attribute);
@@ -20,7 +21,13 @@ FilesWidgetAsset::register($this);
 
 echo Html::activeHiddenInput($model, $attribute, ['class' => 'modal-files-input', 'value' => '']);
 
-$filesView = $this->render("_files", ['files' => $files, 'inputName' => $inputName, 'multiple' => $multiple]);
+$filesView = $this->render("_files", [
+    'files' => $files,
+    'inputName' => $inputName,
+    'multiple' => $multiple,
+    'staticHost' => $staticHost,
+]);
+
 echo Html::tag('div', $filesView, ['id' => $inputId . '-preview', 'class' => 'form-group']);
 
 echo Html::a(Yii::t('files', 'Select files'), '#', [

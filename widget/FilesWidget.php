@@ -10,6 +10,7 @@ namespace zrk4939\modules\files\widget;
 
 
 use yii\bootstrap\InputWidget;
+use zrk4939\modules\files\FilesModule;
 
 class FilesWidget extends InputWidget
 {
@@ -22,12 +23,15 @@ class FilesWidget extends InputWidget
 
     public function run()
     {
+        $staticHost = FilesModule::getStaticHost();
+
         return $this->render('widget', [
             'model' => $this->model,
             'attribute' => $this->attribute,
             'multiple' => $this->multiple,
             'files' => $this->files,
             'types' => $this->types,
+            'staticHost' => $staticHost,
         ]);
     }
 }

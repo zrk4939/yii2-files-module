@@ -70,6 +70,7 @@ class File extends \yii\db\ActiveRecord
             [
                 'class' => UploadFilesBehavior::className(),
                 'attribute' => 'filename',
+                'moveTo' => FilesModule::getUploadPath() . '/files',
             ],
             [
                 'class' => FileNameBehavior::className(),
@@ -126,11 +127,9 @@ class File extends \yii\db\ActiveRecord
      */
     public function getFullPath()
     {
-        $filePath = strrpos($this->path, '/', strlen($this->path) - 1)
+        return strrpos($this->path, '/', strlen($this->path) - 1)
             ? $this->path . $this->filename
             : $this->path . '/' . $this->filename;
-
-        return Yii::$app->params['frontendUrl'] . $filePath;
     }
 
     /**

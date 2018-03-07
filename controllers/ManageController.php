@@ -2,11 +2,6 @@
 
 namespace zrk4939\modules\files\controllers;
 
-use zrk4939\helpers\ImageOptimization;
-use zrk4939\modules\files\FilesModule;
-use zrk4939\modules\files\forms\FilesForm;
-use zrk4939\modules\files\models\File;
-use zrk4939\widgets\plupload\actions\PluploadAction;
 use Yii;
 use yii\bootstrap\Html;
 use yii\data\Pagination;
@@ -14,6 +9,11 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use zrk4939\helpers\ImageOptimization;
+use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\forms\FilesForm;
+use zrk4939\modules\files\models\File;
+use zrk4939\widgets\plupload\actions\PluploadAction;
 
 /**
  * ManageController implements the CRUD actions for File model.
@@ -95,6 +95,7 @@ class ManageController extends Controller
             'CKEditor' => $CKEditor,
             'CKEditorFuncNum' => $CKEditorFuncNum,
             'containerName' => $containerName,
+            'staticHost' => $this->module->staticHost,
         ];
 
         if ($frame) {

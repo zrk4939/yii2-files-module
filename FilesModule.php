@@ -10,8 +10,10 @@ use yii\helpers\ArrayHelper;
 class FilesModule extends \yii\base\Module
 {
     public $extensions = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt'];
-    public $tempDirectory = '@uploads/temp';
-    public $rootAlias = '@webroot';
+    public $uploadPath = '@webroot/uploads';
+    public $rootPath = '@webroot';
+
+    public $staticHost = false;
 
     /**
      * @var array
@@ -38,9 +40,14 @@ class FilesModule extends \yii\base\Module
         return self::getInstance()->extensions;
     }
 
+    public static function getUploadPath()
+    {
+        return self::getInstance()->uploadPath;
+    }
+
     public static function getTempDirectory()
     {
-        return self::getInstance()->tempDirectory;
+        return self::getUploadPath() . '/temp';
     }
 
     public static function getThumbs()
@@ -50,7 +57,7 @@ class FilesModule extends \yii\base\Module
 
     public static function getRootAlias()
     {
-        return self::getInstance()->rootAlias;
+        return self::getInstance()->rootPath;
     }
 
     /**

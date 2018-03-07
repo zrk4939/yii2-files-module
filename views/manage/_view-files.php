@@ -11,6 +11,7 @@ use yii\widgets\LinkPager;
 /* @var $files \zrk4939\modules\files\models\File[] */
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
+/* @var $staticHost string */
 
 FilesAsset::register($this);
 ?>
@@ -56,13 +57,16 @@ FilesAsset::register($this);
             }
 
             $class = $file->isImage ? 'images__image' : 'images__file';
+
+            // TODO background-image only for images files
+            $file_url = $staticHost ? $staticHost . $file->fullPath : $file->fullPath;
             $options = [
                 'data-file-id' => $file->id,
                 'data-file-path' => $file->fullPath,
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',
-                'style' => $file->isImage ? "background-image: url('{$file->fullPath}')" : null,
+                'style' => $file->isImage ? "background-image: url('{$file_url}')" : null,
 
             ];
 

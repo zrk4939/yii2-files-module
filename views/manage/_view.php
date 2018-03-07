@@ -11,6 +11,8 @@ use yii\widgets\Pjax;
 /* @var $CKEditor string */
 /* @var $CKEditorFuncNum string */
 
+/* @var $staticHost string */
+
 $dataColumns = [
     ['class' => 'yii\grid\SerialColumn'],
     'preview:raw',
@@ -56,6 +58,6 @@ JS;
     'id' => 'grid-files-pjax'
 ]) ?>
     <div class="files-wrapper">
-        <?php echo $this->render('_view-files', ['files' => $files, 'pages' => $pages, 'frame' => $frame]) ?>
+        <?php echo $this->render('_view-files', ['files' => $files, 'pages' => $pages, 'frame' => $frame, 'staticHost' => $staticHost]) ?>
     </div>
 <?php Pjax::end() ?>
