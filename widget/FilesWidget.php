@@ -23,7 +23,7 @@ class FilesWidget extends InputWidget
 
     public function run()
     {
-        $staticHost = FilesModule::getStaticHost();
+        $mod = FilesModule::getInstance();
 
         return $this->render('widget', [
             'model' => $this->model,
@@ -31,7 +31,7 @@ class FilesWidget extends InputWidget
             'multiple' => $this->multiple,
             'files' => $this->files,
             'types' => $this->types,
-            'staticHost' => $staticHost,
+            'staticHost' => $mod->staticHost,
         ]);
     }
 }

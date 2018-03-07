@@ -62,7 +62,7 @@ FilesAsset::register($this);
             $file_url = $staticHost ? $staticHost . $file->fullPath : $file->fullPath;
             $options = [
                 'data-file-id' => $file->id,
-                'data-file-path' => $file->fullPath,
+                'data-file-url' => $file_url,
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',

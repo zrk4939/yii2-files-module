@@ -26,7 +26,7 @@ filesContainer.prototype.initFrameOpen = function () {
 filesContainer.prototype.addFilePreview = function (fileRow) {
     var fileId = fileRow.data('file-id'),
         fileName = fileRow.data('filename'),
-        filePath = fileRow.data('file-path'),
+        fileUrl = fileRow.data('file-url'),
         fileIsImage = fileRow.data('is-image');
 
     if (!this.multiple) {
@@ -48,7 +48,7 @@ filesContainer.prototype.addFilePreview = function (fileRow) {
         $previewFile = $("<div />")
             .addClass('preview-file')
             .addClass('image')
-            .css({'background-image': 'url("' + filePath + '")'});
+            .css({'background-image': 'url("' + fileUrl + '")'});
     } else {
         $previewFile = $("<div />")
             .addClass('preview-file')
