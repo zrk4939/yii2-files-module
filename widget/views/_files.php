@@ -14,7 +14,7 @@ if (!empty($files)) {
             echo $this->render('_files-one', ['file' => $file, 'inputName' => $inputName, 'staticHost' => $staticHost]);
         }
     } elseif (!$multiple && is_object($files)) {
-        echo $this->render('_files-one', ['file' => $file, 'inputName' => $inputName, 'staticHost' => $staticHost]);
+        echo $this->render('_files-one', ['file' => $files, 'inputName' => $inputName, 'staticHost' => $staticHost]);
     }
 } else {
     echo Html::tag('span', Yii::t('yii', '(not set)'), ['class' => 'not-set']);
