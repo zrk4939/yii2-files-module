@@ -65,7 +65,7 @@ FilesAsset::register($this);
                 'data-filename' => $file->filename,
                 'data-is-image' => $file->isImage ? 1 : 0,
                 'class' => $class . ' file-one-row',
-                'style' => $file->isImage ? "background-image: url('{$file_url}')" : null,
+                'style' => $file->isImage ? "background-image: url('{$file->fullPath}')" : null,
 
             ];
 
