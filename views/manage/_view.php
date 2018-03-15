@@ -39,7 +39,7 @@ JS;
         $script = <<<JS
 $('.file-one-row').on('click', function() {
     var data = $(this),
-        path = data.data('file-path');
+        path = data.data('file-url');
     
     window.opener.CKEDITOR.tools.callFunction( {$CKEditorFuncNum}, path);
     window.close();
