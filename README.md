@@ -1,4 +1,5 @@
 # yii2-files-module
+# DOES NOT WORK
 
 Files manager module for the [Yii2](http://www.yiiframework.ru/) framework
 
@@ -26,7 +27,9 @@ to the repositories array of your `composer.json` file.
 ```php
  'files' => [
     'class' => 'zrk4939\modules\files\FilesModule',
-    'extensions' => ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt', 'zip']
+    'extensions' => ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt', 'zip'],
+    'uploadPath' => '@webroot/uploads',
+    'rootPath' => '@webroot',
  ],
 ```
 

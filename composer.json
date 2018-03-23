@@ -1,11 +1,9 @@
 {
   "name": "zrk4939/files-module",
-  "type": "yii2-extension",
   "description": "Files Module",
-  "keywords": [
-    "yii2",
-    "extension"
-  ],
+  "type": "yii2-extension",
+  "license": "Unlicense",
+  "keywords": ["yii2", "extension", "files"],
   "authors": [
     {
       "name": "Ilya Youshketov",
