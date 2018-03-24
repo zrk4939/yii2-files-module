@@ -48,20 +48,7 @@ class FilesForm extends Model
                 $filePath = $tempDir . DIRECTORY_SEPARATOR . $fileName;
 
                 if (file_exists($filePath) && is_file($filePath)) {
-                    $info = pathinfo($filePath);
-
-                    $root = Yii::getAlias(FilesModule::getRootAlias());
-
-                    $model = new File();
-                    $model->path = str_replace($root, '', $info['dirname']) . '/';
-                    $model->filename = $info['basename'];
-                    $model->status = 1;
-                    $model->mime = FileHelper::getMimeType($filePath);
-                    $model->filesize = filesize($filePath);
-
-                    $model->validate();
-                    $uniquePath = $info['dirname'] . DIRECTORY_SEPARATOR . $model->filename;
-                    rename($filePath, $uniquePath); // TODO все эти действия производить в событиях
+                    $model = $this->prepareModel($filePath);
 
                     if (!$model->save()) {
                         $result['errors'][$fileName] = $model->getErrors();
@@ -71,6 +58,26 @@ class FilesForm extends Model
         }
 
         return $result;
+    }
+
+    public function prepareModel($filePath)
+    {
+        $info = pathinfo($filePath);
+
+        $root = Yii::getAlias(FilesModule::getRootAlias());
+
+        $model = new File();
+        $model->path = str_replace($root, '', $info['dirname']) . '/';
+        $model->filename = $info['basename'];
+        $model->status = 1;
+        $model->mime = FileHelper::getMimeType($filePath);
+        $model->filesize = filesize($filePath);
+
+        $model->validate();
+        $uniquePath = $info['dirname'] . DIRECTORY_SEPARATOR . $model->filename;
+        rename($filePath, $uniquePath); // TODO все эти действия производить в событиях
+
+        return $model;
     }
 
 }
