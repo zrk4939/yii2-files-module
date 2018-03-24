@@ -6,7 +6,7 @@
  * Time: 15:41
  */
 
-namespace zrk4939\modules\files\widget;
+namespace zrk4939\modules\files\widgets\files;
 
 
 use yii\bootstrap\InputWidget;

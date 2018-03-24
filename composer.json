@@ -1,5 +1,5 @@
 {
-  "name": "zrk4939/yii2-files-module",
+  "name": "zrk4939/files-module",
   "description": "Files Module",
   "type": "yii2-extension",
   "license": "Unlicense",
@@ -12,7 +12,9 @@
   ],
   "require": {
     "yiisoft/yii2": "*",
-    "fortawesome/font-awesome": "^4.7"
+    "boundstate/yii2-plupload": "*",
+    "fortawesome/font-awesome": "^4.7",
+    "npm-asset/lightbox2": "^2.10"
   },
   "autoload": {
     "psr-4": {

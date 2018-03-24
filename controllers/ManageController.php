@@ -9,11 +9,11 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use zrk4939\helpers\ImageOptimization;
+use zrk4939\modules\files\actions\PluploadAction;
+use zrk4939\modules\files\components\ImageOptimization;
 use zrk4939\modules\files\FilesModule;
 use zrk4939\modules\files\forms\FilesForm;
 use zrk4939\modules\files\models\File;
-use zrk4939\widgets\plupload\actions\PluploadAction;
 
 /**
  * ManageController implements the CRUD actions for File model.

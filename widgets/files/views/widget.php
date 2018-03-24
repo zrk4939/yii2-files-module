@@ -1,6 +1,6 @@
 <?php
 
-use zrk4939\modules\files\widget\assets\FilesWidgetAsset;
+use zrk4939\modules\files\widgets\files\assets\FilesWidgetAsset;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 

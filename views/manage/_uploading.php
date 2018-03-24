@@ -1,6 +1,6 @@
 <?php
 
-use zrk4939\widgets\plupload\PluploadWidget;
+use zrk4939\modules\files\widgets\plupload\PluploadWidget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 

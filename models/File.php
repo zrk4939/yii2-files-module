@@ -2,15 +2,14 @@
 
 namespace zrk4939\modules\files\models;
 
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use zrk4939\modules\files\behaviors\FileNameBehavior;
 use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\bootstrap\Html;
 use yii\helpers\FileHelper;
 use zrk4939\modules\files\FilesModule;
-use zrk4939\modules\files\helpers\ThumbnailHelper;
+use zrk4939\modules\files\components\ThumbnailHelper;
 
 /**
  * This is the model class for table "{{%file}}".
@@ -196,7 +195,7 @@ class File extends \yii\db\ActiveRecord
     {
         $sizes = FilesModule::getPreviewSizes($key);
         if (empty($sizes)) {
-            throw new InvalidParamException("Preview key settings not found for key «{$key}»");
+            throw new InvalidArgumentException("Preview key settings not found for key «{$key}»");
         }
 
         $file_path = Yii::getAlias(FilesModule::getRootAlias() . $this->path);
