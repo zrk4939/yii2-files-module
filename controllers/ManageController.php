@@ -50,7 +50,7 @@ class ManageController extends Controller
                     $response = [
                         'status' => 'ok',
                         'fileName' => $params['name'],
-                        'preview' => '/uploads/temp/' . $params['name'],
+                        'preview' => $this->module->staticHost . '/uploads/temp/' . $params['name'],
                         'attr' => $params['attr'],
                         'inputName' => null,
                         'isImage' => ImageOptimization::isImage($filename)
