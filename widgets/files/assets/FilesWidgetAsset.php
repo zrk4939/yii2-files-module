@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
 
 class FilesWidgetAsset extends AssetBundle
 {
-    public $sourcePath = '@zrk4939/modules/files/widget/assets/dist';
+    public $sourcePath = '@zrk4939/modules/files/widgets/files/assets/dist';
 
     public $js = [
         'files-widget.js',
