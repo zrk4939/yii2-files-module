@@ -91,8 +91,9 @@ class ThumbnailHelper extends BaseObject
     public static function createImageThumbnail(string $imagesDir, string $item, string $thumb_key, array $sizes)
     {
         $thumbFileName = $thumb_key . '_' . $item;
+        $force = isset($sizes['force']) ? $sizes['force'] : false;
 
-        if (!file_exists($imagesDir . $thumbFileName)) {
+        if (!file_exists($imagesDir . $thumbFileName) || $force) {
             self::generateImageThumbnail(
                 $imagesDir . $item,
                 $imagesDir . $thumbFileName,
