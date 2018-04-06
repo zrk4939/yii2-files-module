@@ -6,6 +6,8 @@ use yii\helpers\ArrayHelper;
 
 /**
  * files module definition class
+ *
+ * @property string $rootAlias
  */
 class FilesModule extends \yii\base\Module
 {
@@ -14,6 +16,13 @@ class FilesModule extends \yii\base\Module
     public $rootPath = '@webroot';
 
     public $staticHost = false;
+
+    public $accessRules = [
+        'main' => [
+            'allow' => true,
+            'roles' => ['@'],
+        ],
+    ];
 
     /**
      * @var array

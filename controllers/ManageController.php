@@ -5,6 +5,7 @@ namespace zrk4939\modules\files\controllers;
 use Yii;
 use yii\bootstrap\Html;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -25,7 +26,14 @@ class ManageController extends Controller
      */
     public function behaviors()
     {
+        /** @var FilesModule $module */
+        $module = $this->module;
+
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => $module->accessRules
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
