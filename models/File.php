@@ -112,11 +112,7 @@ class File extends \yii\db\ActiveRecord
      */
     public function getPreview($key)
     {
-        $preview = $this->hasOne(File::className(), ['parent_id' => 'id'])->andWhere(['preview_key' => $key])->one();
-
-        if (empty($preview)) {
-            $preview = $this->generatePreview($key);
-        }
+        $preview = $this->generatePreview($key);
 
         return $preview;
     }
@@ -193,6 +189,8 @@ class File extends \yii\db\ActiveRecord
      */
     private function generatePreview(string $key)
     {
+        $previewFile = $this->hasOne(File::className(), ['parent_id' => 'id'])->andWhere(['preview_key' => $key])->one();
+
         $sizes = FilesModule::getPreviewSizes($key);
         if (empty($sizes)) {
             throw new InvalidArgumentException("Preview key settings not found for key «{$key}»");
@@ -203,7 +201,8 @@ class File extends \yii\db\ActiveRecord
 
         $thumbFileName = $key . '_' . $this->filename;
         $previewFilePath = $file_path . $thumbFileName;
-        if (file_exists($previewFilePath)) {
+
+        if (!($previewFile) && file_exists($previewFilePath)) {
             $previewFile = new FileThumb();
             $previewFile->parent_id = $this->id;
             $previewFile->path = $this->path;
@@ -214,10 +213,8 @@ class File extends \yii\db\ActiveRecord
             $previewFile->mime = FileHelper::getMimeType($previewFilePath);
 
             $previewFile->save();
-
-            return $previewFile;
         }
 
-        throw new \Exception("Failed to create preview with key «{$key}»");
+        return $previewFile;
     }
 }
