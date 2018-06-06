@@ -59,3 +59,15 @@ echo $form->field($model, 'images_arr')->widget(\zrk4939\modules\files\widget\Fi
 ]);
 ?>
 ```
+
+### CKEditor options
+```php
+$imageTypes = Json::encode([
+    'image/*'
+]);
+
+'editorOptions' => [
+    'filebrowserBrowseUrl' => Url::to(['/files/manage/index', 'frame' => 1]),
+    'filebrowserImageBrowseUrl' => Url::to(['/files/manage/index', 'frame' => 1, 'types' => $imageTypes]),
+],
+```
