@@ -92,7 +92,13 @@ class ManageController extends Controller
         $model = new FilesForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->saveUploadFiles()) {
-            return $this->redirect(['index', 'frame' => $frame, 'containerName' => $containerName]);
+            return $this->redirect(['index',
+                'types' => $types,
+                'frame' => $frame,
+                'containerName' => $containerName,
+                'CKEditor' => $CKEditor,
+                'CKEditorFuncNum' => $CKEditorFuncNum
+            ]);
         }
 
         $renderParams = [
