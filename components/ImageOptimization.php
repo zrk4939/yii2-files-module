@@ -252,25 +252,4 @@ class ImageOptimization extends BaseObject
 
         return $fileName;
     }
-
-    /**
-     * @param $files
-     * @param $rootPath
-     */
-    public static function deleteFiles($files, $rootPath)
-    {
-        $thumbs = ThumbnailHelper::getThumbs();
-
-        foreach ($files as $filename) {
-            if (file_exists($rootPath . $filename) && is_file($rootPath . $filename)) {
-                unlink($rootPath . $filename);
-            }
-
-            foreach ($thumbs as $thumbName => $properties) {
-                if (file_exists($rootPath . $thumbName . '_' . $filename)) {
-                    unlink($rootPath . $thumbName . '_' . $filename);
-                }
-            }
-        }
-    }
 }

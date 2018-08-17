@@ -2,14 +2,14 @@
 
 namespace zrk4939\modules\files\models;
 
-use yii\base\InvalidArgumentException;
-use zrk4939\modules\files\behaviors\FileNameBehavior;
-use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use Yii;
+use yii\base\InvalidArgumentException;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
-use zrk4939\modules\files\FilesModule;
+use zrk4939\modules\files\behaviors\FileNameBehavior;
+use zrk4939\modules\files\behaviors\UploadFilesBehavior;
 use zrk4939\modules\files\components\ThumbnailHelper;
+use zrk4939\modules\files\FilesModule;
 
 /**
  * This is the model class for table "{{%file}}".
@@ -213,7 +213,7 @@ class File extends \yii\db\ActiveRecord
             $previewFile->mime = FileHelper::getMimeType($previewFilePath);
 
             $previewFile->save();
-        } elseif (!file_exists($previewFilePath)){
+        } elseif (!file_exists($previewFilePath)) {
             return $this;
         }
 

@@ -75,7 +75,16 @@ class FilesModule extends \yii\base\Module
      */
     public static function getPreviewSizes(string $key)
     {
-        return ArrayHelper::getValue(self::getThumbs(), $key);
+        $default = [
+            'width' => 150,
+            'height' => 150,
+            'cropAndCenter' => true,
+            'force' => false,
+            'quality' => 75
+        ];
+        $sizes = ArrayHelper::getValue(self::getThumbs(), $key, []);
+
+        return ArrayHelper::merge($default, $sizes);
     }
 
     /**

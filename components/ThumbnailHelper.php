@@ -18,70 +18,6 @@ use yii\helpers\ArrayHelper;
  */
 class ThumbnailHelper extends BaseObject
 {
-    public static function getThumbs()
-    {
-        return [
-            'preview' => [
-                'width' => 150,
-                'height' => 150,
-                'cropAndCenter' => true
-            ],
-            'small' => [
-                'width' => 240,
-                'height' => 269,
-                'cropAndCenter' => true
-            ],
-            'extra_small' => [
-                'width' => 80,
-                'height' => 80,
-                'cropAndCenter' => true
-            ],
-            'slider' => [
-                'width' => 480,
-                'height' => 538,
-                'cropAndCenter' => true
-            ],
-        ];
-    }
-
-    /**
-     * @param $imagesDir
-     * @param $filename
-     * @param string $prefix
-     * @return string
-     */
-    public static function getImageThumbNail($imagesDir, $filename, $prefix = 'preview')
-    {
-        if (!key_exists($prefix, self::getThumbs())) {
-            throw new InvalidArgumentException();
-        }
-
-        $thumbFileName = $prefix . '_' . $filename;
-        $sizes = ArrayHelper::getValue(self::getThumbs(), $prefix);
-
-        if (file_exists($imagesDir . $thumbFileName) || ThumbnailHelper::generateImageThumbnail($imagesDir . $filename, $imagesDir . $thumbFileName, $sizes['width'], $sizes['height'], $sizes['cropAndCenter'])) {
-            return $thumbFileName;
-        }
-
-        return $filename;
-    }
-
-    public static function createImagesThumbnails($imagesDir, $webDir, $valueArray, $thumbNames = [])
-    {
-        if (!empty($valueArray) && is_array($valueArray)) {
-            foreach ($valueArray as $item) {
-                foreach (self::getThumbs() as $prefix => $sizes) {
-                    if (in_array($prefix, $thumbNames)) {
-                        $thumbFileName = $prefix . '_' . $item;
-                        if (!file_exists($imagesDir . $thumbFileName)) {
-                            ThumbnailHelper::generateImageThumbnail($imagesDir . $item, $imagesDir . $thumbFileName, $sizes['width'], $sizes['height'], $sizes['cropAndCenter']);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * @param string $imagesDir
      * @param string $item
@@ -98,8 +34,9 @@ class ThumbnailHelper extends BaseObject
                 $imagesDir . $item,
                 $imagesDir . $thumbFileName,
                 $sizes['width'],
-                isset($sizes['height']) ? $sizes['height'] : null,
-                isset($sizes['cropAndCenter']) ? $sizes['cropAndCenter'] : null
+                $sizes['height'],
+                $sizes['quality'],
+                $sizes['cropAndCenter']
             );
         }
     }
@@ -129,12 +66,13 @@ class ThumbnailHelper extends BaseObject
     /**
      * @param string $source_image_path
      * @param string $thumbnail_image_path
-     * @param string $width
-     * @param string $height
+     * @param int $width
+     * @param int $height
+     * @param int $quality
      * @param bool $cropAndCenter
      * @return bool
      */
-    protected static function generateImageThumbnail($source_image_path, $thumbnail_image_path, $width, $height, $cropAndCenter = true)
+    protected static function generateImageThumbnail(string $source_image_path, string $thumbnail_image_path, int $width, int $height, int $quality, bool $cropAndCenter)
     {
         if (!static::isImage($source_image_path)) {
             return false;
@@ -172,7 +110,7 @@ class ThumbnailHelper extends BaseObject
                 }
 
                 if ($reSave) {
-                    $result = imagejpeg($source_gd_image, $source_image_path, 95);
+                    $result = imagejpeg($source_gd_image, $source_image_path, $quality);
                     if ($result) {
                         chmod($source_image_path, 0775);
                     }
@@ -229,7 +167,7 @@ class ThumbnailHelper extends BaseObject
         } else if ($source_image_type === IMAGETYPE_PNG) {
             $result = imagepng($thumbnail_gd_image, $thumbnail_image_path, 1);
         } else {
-            $result = imagejpeg($thumbnail_gd_image, $thumbnail_image_path, 95);
+            $result = imagejpeg($thumbnail_gd_image, $thumbnail_image_path, $quality);
         }
 
         if ($result) {

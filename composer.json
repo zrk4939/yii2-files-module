@@ -11,6 +11,9 @@
     }
   ],
   "require": {
+    "php": ">=7.0",
+    "ext-gd": "*",
+    "ext-exif": "*",
     "yiisoft/yii2": "*",
     "boundstate/yii2-plupload": "*",
     "fortawesome/font-awesome": "^4.7",
