@@ -184,7 +184,7 @@ class File extends \yii\db\ActiveRecord
 
     /**
      * @param string $key
-     * @return FileThumb
+     * @return File
      * @throws \Exception
      */
     private function generatePreview(string $key)
@@ -213,6 +213,8 @@ class File extends \yii\db\ActiveRecord
             $previewFile->mime = FileHelper::getMimeType($previewFilePath);
 
             $previewFile->save();
+        } elseif (!file_exists($previewFilePath)){
+            return $this;
         }
 
         return $previewFile;
