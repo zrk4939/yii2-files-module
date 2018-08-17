@@ -110,7 +110,7 @@ class ThumbnailHelper extends BaseObject
                 }
 
                 if ($reSave) {
-                    $result = imagejpeg($source_gd_image, $source_image_path, $quality);
+                    $result = imagejpeg($source_gd_image, $source_image_path, 95);
                     if ($result) {
                         chmod($source_image_path, 0775);
                     }
