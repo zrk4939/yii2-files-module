@@ -83,7 +83,7 @@ class FileSearch extends File
         $query->andFilterWhere(['like', 'path', $this->s_path])
             ->andFilterWhere(['like', 'filename', $this->s_filename])
             ->andFilterWhere(['like', 'title', $this->title])
-            ->filterUploadedRange(strtotime($this->uploaded_from), strtotime($this->uploaded_to));
+            ->filterUploadedRange(strtotime($this->uploaded_from) ?: null, strtotime($this->uploaded_to) ?: null);
 
         return $query;
     }
