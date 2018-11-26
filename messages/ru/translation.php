@@ -11,5 +11,11 @@ return [
     'Uploading' => 'Загрузка',
     '(not available)' => '(не доступно)',
 
+    'Uploaded From' => 'Загружено от',
+    'Uploaded To' => 'Загружено до',
+
+    'Search' => 'Искать',
+    'Reset' => 'Сброс',
+
     'Select files' => 'Выбрать файлы',
 ];

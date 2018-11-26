@@ -20,6 +20,16 @@ class FileQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * @param int $from
+     * @param int $to
+     * @return $this
+     */
+    public function filterUploadedRange($from = 0, $to = 999999999)
+    {
+        return $this->andFilterWhere(['between', 'created_at', $from, $to]);
+    }
+
+    /**
      * @inheritdoc
      * @return File[]|array
      */

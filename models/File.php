@@ -158,6 +158,7 @@ class File extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
+     * TODO BEFORE INSERT/UPDATE
      */
     public function beforeValidate()
     {

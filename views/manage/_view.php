@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $files \zrk4939\modules\files\models\File[] */
+/* @var $searchModel \zrk4939\modules\files\models\FileSearch */
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
 /* @var $containerName string */
@@ -53,11 +54,7 @@ JS;
 }
 
 ?>
-<?php Pjax::begin([
-    'enablePushState' => false,
-    'id' => 'grid-files-pjax'
-]) ?>
-    <div class="files-wrapper">
-        <?php echo $this->render('_view-files', ['files' => $files, 'pages' => $pages, 'frame' => $frame, 'staticHost' => $staticHost]) ?>
-    </div>
-<?php Pjax::end() ?>
+
+<div class="files-wrapper">
+    <?php echo $this->render('_view-files', ['files' => $files, 'searchModel' => $searchModel, 'pages' => $pages, 'frame' => $frame, 'staticHost' => $staticHost]) ?>
+</div>

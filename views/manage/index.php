@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $files \zrk4939\modules\files\models\File[] */
+/* @var $searchModel \zrk4939\modules\files\models\FileSearch */
 /* @var $pages \yii\data\Pagination */
 /* @var $model \zrk4939\modules\files\forms\FilesForm */
 /* @var $frame boolean */
@@ -28,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('yii', 'View'),
                 'content' => $this->render('_view', [
                     'files' => $files,
+                    'searchModel' => $searchModel,
                     'pages' => $pages,
                     'frame' => $frame,
                     'CKEditor' => $CKEditor,

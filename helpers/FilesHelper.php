@@ -9,8 +9,8 @@
 namespace zrk4939\modules\files\helpers;
 
 
-use zrk4939\modules\files\models\File;
 use yii\base\Object;
+use zrk4939\modules\files\models\File;
 
 class FilesHelper extends Object
 {

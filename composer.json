@@ -17,7 +17,8 @@
     "yiisoft/yii2": "*",
     "boundstate/yii2-plupload": "*",
     "fortawesome/font-awesome": "^4.7",
-    "npm-asset/lightbox2": "^2.10"
+    "npm-asset/lightbox2": "^2.10",
+    "yiisoft/yii2-jui": "2.0.6"
   },
   "autoload": {
     "psr-4": {

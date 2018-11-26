@@ -1,13 +1,14 @@
 <?php
 
-use zrk4939\modules\files\assets\FilesAsset;
-use zrk4939\modules\files\helpers\FilesHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use zrk4939\modules\files\assets\FilesAsset;
+use zrk4939\modules\files\helpers\FilesHelper;
 
 /* @var $this yii\web\View */
 /* @var $files \zrk4939\modules\files\models\File[] */
+/* @var $searchModel \zrk4939\modules\files\models\FileSearch */
 /* @var $pages \yii\data\Pagination */
 /* @var $frame boolean */
 /* @var $staticHost string */
@@ -17,6 +18,8 @@ FilesAsset::register($this);
     <div class="">
         <?= $pages->totalCount ?> записей всего
     </div>
+
+<?= $this->render('_search', ['model' => $searchModel]) ?>
 
     <div class="files-wrapper">
         <?php

@@ -1,8 +1,8 @@
 <?php
 
-use zrk4939\modules\files\widgets\plupload\PluploadWidget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use zrk4939\modules\files\widgets\plupload\PluploadWidget;
 
 /* @var $this yii\web\View */
 /* @var $model \zrk4939\modules\files\forms\FilesForm */

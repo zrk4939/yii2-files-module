@@ -13,14 +13,14 @@ use yii\web\AssetBundle;
 
 class LightBoxAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/npm-asset/lightbox2/src';
+    public $sourcePath = '@vendor/npm-asset/lightbox2/dist';
 
     public $css = [
-        'lightbox.js',
+        'css/lightbox.min.css',
     ];
 
     public $js = [
-        'lightbox.css',
+        'js/lightbox.min.js',
     ];
 
     public $depends = [

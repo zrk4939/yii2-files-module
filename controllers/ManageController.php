@@ -15,6 +15,7 @@ use zrk4939\modules\files\components\ImageOptimization;
 use zrk4939\modules\files\FilesModule;
 use zrk4939\modules\files\forms\FilesForm;
 use zrk4939\modules\files\models\File;
+use zrk4939\modules\files\models\FileSearch;
 
 /**
  * ManageController implements the CRUD actions for File model.
@@ -80,16 +81,15 @@ class ManageController extends Controller
      */
     public function actionIndex($types = [], $frame = false, $containerName = null, $CKEditor = null, $CKEditorFuncNum = null)
     {
-        $query = $this->getFilesQuery($types);
+        $model = new FilesForm();
+        $searchModel = new FileSearch();
+        $query = $searchModel->search(Yii::$app->request->queryParams, $types);
 
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 50]);
         $files = $query->offset($pages->offset)
             ->limit($pages->limit)
-            ->orderBy(['created_at' => SORT_DESC])
             ->all();
-
-        $model = new FilesForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->saveUploadFiles()) {
             return $this->redirect(['index',
@@ -103,6 +103,7 @@ class ManageController extends Controller
 
         $renderParams = [
             'files' => $files,
+            'searchModel' => $searchModel,
             'pages' => $pages,
             'model' => $model,
             'frame' => $frame,
@@ -165,25 +166,5 @@ class ManageController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    /**
-     * @param array|string $mimeTypes
-     * @return \zrk4939\modules\files\models\FileQuery
-     */
-    private function getFilesQuery($mimeTypes = [])
-    {
-        $query = File::find()
-            ->mainImages();
-
-        if (!empty($mimeTypes)) {
-            $types = Json::decode($mimeTypes);
-
-            foreach ($types as $type) {
-                $query->andFilterWhere(['like', 'mime', str_replace('*', '%', $type), false]);
-            }
-        }
-
-        return $query;
     }
 }
