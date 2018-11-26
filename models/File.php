@@ -183,6 +183,53 @@ class File extends \yii\db\ActiveRecord
         return parent::beforeValidate();
     }
 
+    public function delete()
+    {
+        if ($this->deletePreviews()) {
+            $transaction = Yii::$app->db->beginTransaction();
+
+            if (parent::delete() && $this->deleteFile()) {
+                $transaction->commit();
+                return true;
+            }
+        }
+
+
+        $transaction->rollBack();
+        return false;
+    }
+
+    private function deleteFile()
+    {
+        $path = Yii::getAlias(FilesModule::getRootAlias()) . $this->path . $this->filename;
+        if (file_exists($path)) {
+            return unlink($path);
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     * @throws \Throwable
+     */
+    private function deletePreviews()
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            foreach ($this->previews as $previewFile) {
+                $previewFile->delete();
+            }
+
+            $transaction->commit();
+            return true;
+        } catch (\Exception $exception) {
+            Yii::error($exception->getMessage());
+            $transaction->rollBack();
+            return false;
+        }
+    }
+
     /**
      * @param string $key
      * @return File
