@@ -19,7 +19,11 @@ FilesAsset::register($this);
         <?= $pages->totalCount ?> записей всего
     </div>
 
-<?= $this->render('_search', ['model' => $searchModel]) ?>
+<?php
+if (!$frame) {
+    echo $this->render('_search', ['model' => $searchModel]);
+}
+?>
 
     <div class="files-wrapper">
         <?php
