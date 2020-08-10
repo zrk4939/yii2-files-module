@@ -44,6 +44,7 @@ class FileQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+        $this->cache(60);
         return parent::one($db);
     }
 }
