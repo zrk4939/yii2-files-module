@@ -69,6 +69,8 @@ class ImageOptimization extends BaseObject
 
         /* ----- */
 
+        $quality = 85;
+
         $saveAs_func = "imagejpeg"; // дефолт
         switch ($source_image_type) {
             case IMAGETYPE_JPEG:
@@ -79,6 +81,7 @@ class ImageOptimization extends BaseObject
                 break;
             case IMAGETYPE_PNG:
                 $saveAs_func = "imagepng";
+                $quality = $quality / 10;
                 break;
         }
 
@@ -98,7 +101,7 @@ class ImageOptimization extends BaseObject
                     8, 0);
             }
 
-            $saveAs_func($newImage, $src, 85); // пересохраняем
+            $saveAs_func($newImage, $src, $quality); // пересохраняем
 
             imagedestroy($source_gd_image);
             imagedestroy($newImage);
