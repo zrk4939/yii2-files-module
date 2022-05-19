@@ -9,10 +9,10 @@
 namespace zrk4939\modules\files\helpers;
 
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use zrk4939\modules\files\models\File;
 
-class FilesHelper extends Object
+class FilesHelper extends BaseObject
 {
     const ICON_TYPES = [
         'pdf',
